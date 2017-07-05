@@ -1,6 +1,6 @@
 # AppAuth with IdentityServer 4 for android
 
-Android simple using AppAuth-Android with identity server 4
+Android simple using [AppAuth-Android](https://github.com/openid/AppAuth-Android) with [identity server 4](https://github.com/IdentityServer/IdentityServer4)
 
 ## Identity Server on the backend 
 
