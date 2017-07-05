@@ -30,7 +30,7 @@ Android simple using [AppAuth-Android](https://github.com/openid/AppAuth-Android
 				}
         
         
-## Edit the data in the gradle.properties
+## Edit the data in the gradle.properties file
 
     clientId= "myClientId"
     clientSecret= "myClientSecret"
