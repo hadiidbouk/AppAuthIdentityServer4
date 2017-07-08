@@ -1,7 +1,10 @@
 # AppAuth with IdentityServer 4 for android
 
-Android sample using [AppAuth-Android](https://github.com/openid/AppAuth-Android) with [identity server 4](https://github.com/IdentityServer/IdentityServer4)
+Android sample using [AppAuth-Android](https://github.com/openid/AppAuth-Android) with [IdentityServer4](https://github.com/IdentityServer/IdentityServer4)
 
+I will add soon :
+* The registration part.
+* The logout from the android phone and from the server side.
 ## Identity Server on the backend 
 
         new Client
