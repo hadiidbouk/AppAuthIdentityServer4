@@ -27,6 +27,7 @@ I will add soon :
 						IdentityServerConstants.StandardScopes.Profile,
 						IdentityServerConstants.StandardScopes.Email,
 						IdentityServerConstants.StandardScopes.Phone,
+						IdentityServerConstants.StandardScopes.OfflineAccess //to get the refresh token
 					},
 
 					AllowOfflineAccess = true
