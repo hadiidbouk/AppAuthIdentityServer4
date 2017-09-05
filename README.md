@@ -1,5 +1,6 @@
 # AppAuth with IdentityServer 4 for android
 
+## You can now use the AppAuth library with webview check [this](https://github.com/hadiidbouk/AppAuthWebView-Android) 
 Android sample using [AppAuth-Android](https://github.com/openid/AppAuth-Android) with [IdentityServer4](https://github.com/IdentityServer/IdentityServer4)
 
 I will add soon :
