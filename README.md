@@ -7,32 +7,31 @@ I will add soon :
 * The registration part.
 * The logout from the android phone and from the server side.
 ## Identity Server on the backend 
-```csharp
-        new Client
-				{
-					ClientId = "myClientId",
-					ClientName = "myClientName",
-					AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
-					RequireConsent = false,
+```csharpnew Client
+{
+    ClientId = "myClientId",
+    ClientName = "myClientName",
+    AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
+    RequireConsent = false,
 
-					ClientSecrets =
-					{
-						new Secret("myClientSecret".Sha256())
-					},
+    ClientSecrets =
+    {
+        new Secret("myClientSecret".Sha256())
+    },
 
-					RedirectUris = { "myRedirectUri://callback" },
+    RedirectUris = { "myRedirectUri://callback" },
 
-					AllowedScopes =
-					{
-						IdentityServerConstants.StandardScopes.OpenId,
-						IdentityServerConstants.StandardScopes.Profile,
-						IdentityServerConstants.StandardScopes.Email,
-						IdentityServerConstants.StandardScopes.Phone,
-						IdentityServerConstants.StandardScopes.OfflineAccess //to get the refresh token
-					},
+    AllowedScopes =
+    {
+        IdentityServerConstants.StandardScopes.OpenId,
+        IdentityServerConstants.StandardScopes.Profile,
+        IdentityServerConstants.StandardScopes.Email,
+        IdentityServerConstants.StandardScopes.Phone,
+        IdentityServerConstants.StandardScopes.OfflineAccess //to get the refresh token
+    },
 
-					AllowOfflineAccess = true
-				}
+    AllowOfflineAccess = true
+}			}
 ```	
 	
 	
