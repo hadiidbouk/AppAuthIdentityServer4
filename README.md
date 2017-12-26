@@ -7,7 +7,8 @@ I will add soon :
 * The registration part.
 * The logout from the android phone and from the server side.
 ## Identity Server on the backend 
-```csharpnew Client
+```csharp
+new Client
 {
     ClientId = "myClientId",
     ClientName = "myClientName",
@@ -31,7 +32,8 @@ I will add soon :
     },
 
     AllowOfflineAccess = true
-}			}
+}
+}
 ```	
 	
 	
