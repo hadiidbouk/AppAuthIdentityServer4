@@ -21,6 +21,14 @@ public class SharedPreferencesRepository{
     }
 
 
+    public void saveCodeVerifier(String codeVerifier) {
+        PreferenceManager.getDefaultSharedPreferences(mContext).edit().putString("Auth.CodeVerifier",codeVerifier).apply();
+    }
+
+    public String getCodeVerifier() {
+        return PreferenceManager.getDefaultSharedPreferences(mContext).getString("Auth.CodeVerifier",null);
+    }
+
      public void saveAuthState(AuthState authState) {
         PreferenceManager.getDefaultSharedPreferences(mContext).edit().putString("AuthState",authState.jsonSerializeString()).apply();
     }
@@ -38,6 +46,4 @@ public class SharedPreferencesRepository{
         return null;
 
     }
-
-
 }

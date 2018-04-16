@@ -16,6 +16,7 @@ import net.openid.appauth.TokenResponse;
 public class LoginAuthActivity extends Activity {
 
     private AuthorizationService mAuthService;
+
     @Override
     public void onCreate(Bundle b) {
         super.onCreate(b);
@@ -36,6 +37,7 @@ public class LoginAuthActivity extends Activity {
 				.Builder(authManager.getAuthConfig(), authManager.getAuth().getClientId())
 				.setAuthorizationCode(resp.authorizationCode)
 				.setRedirectUri(Uri.parse(authManager.getAuth().getRedirectUri()))
+                .setCodeVerifier(new SharedPreferencesRepository(this).getCodeVerifier())
 				.build();
 
             mAuthService = authManager.getAuthService();

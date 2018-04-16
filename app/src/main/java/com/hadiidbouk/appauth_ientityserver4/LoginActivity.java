@@ -9,6 +9,7 @@ import android.view.View;
 
 import net.openid.appauth.AuthorizationRequest;
 import net.openid.appauth.AuthorizationService;
+import net.openid.appauth.CodeVerifierUtil;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -23,14 +24,22 @@ public class LoginActivity extends AppCompatActivity {
 		AuthorizationService authService = authManager.getAuthService();
 		Auth auth = authManager.getAuth();
 
-		AuthorizationRequest authRequest = new AuthorizationRequest
+		AuthorizationRequest.Builder authRequestBuilder = new AuthorizationRequest
 			.Builder(
 			authManager.getAuthConfig(),
 			auth.getClientId(),
 			auth.getResponseType(),
 			Uri.parse(auth.getRedirectUri()))
-			.setScope(auth.getScope())
-			.build();
+			.setScope(auth.getScope());
+
+		//Generate and save code verifier to be used later
+		String codeVerifier = CodeVerifierUtil.generateRandomCodeVerifier();
+		SharedPreferencesRepository sharedPreferencesRepository = new SharedPreferencesRepository(this);
+		sharedPreferencesRepository.saveCodeVerifier(codeVerifier);
+
+		authRequestBuilder.setCodeVerifier(codeVerifier);
+
+		AuthorizationRequest authRequest = authRequestBuilder.build();
 
 		Intent authIntent = new Intent(this, LoginAuthActivity.class);
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, authRequest.hashCode(), authIntent, 0);
