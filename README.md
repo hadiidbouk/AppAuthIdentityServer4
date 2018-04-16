@@ -31,8 +31,6 @@ new Client
     AllowedGrantTypes = GrantTypes.Code,
     AllowAccessTokensViaBrowser = true,
     RequireConsent = false,
-
-    AllowOfflineAccess = true,
     RefreshTokenUsage = TokenUsage.ReUse,
     RequirePkce = true,
     
