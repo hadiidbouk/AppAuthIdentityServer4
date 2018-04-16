@@ -2,7 +2,9 @@ package com.hadiidbouk.appauth_ientityserver4;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 
+import net.openid.appauth.AppAuthConfiguration;
 import net.openid.appauth.AuthState;
 import net.openid.appauth.AuthorizationException;
 import net.openid.appauth.AuthorizationResponse;
@@ -27,14 +29,22 @@ public class AuthManager {
 
 	private AuthManager(Context context){
 		mSharedPrefRep = new SharedPreferencesRepository(context);
-        setAuthData();
+		setAuthData();
+
 		mAuthConfig = new AuthorizationServiceConfiguration(
 				Uri.parse(mAuth.getAuthorizationEndpointUri()),
 				Uri.parse(mAuth.getTokenEndpointUri()),
 				null);
 		mAuthState = mSharedPrefRep.getAuthState();
 
-		mAuthService = new AuthorizationService(context);
+		AppAuthConfiguration.Builder appAuthConfigBuilder = new AppAuthConfiguration.Builder();
+
+		//To Allow Http in requests in debug mode
+		if(BuildConfig.DEBUG)
+			appAuthConfigBuilder.setConnectionBuilder(AppAuthConnectionBuilderForTesting.INSTANCE);
+
+		AppAuthConfiguration appAuthConfig = appAuthConfigBuilder.build();
+		mAuthService = new AuthorizationService(context, appAuthConfig);
 	}
 
 
