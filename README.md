@@ -3,16 +3,12 @@
 ## You can now use the AppAuth library with **WebView** check [this](https://github.com/hadiidbouk/AppAuthWebView-Android) 
 Android sample using [AppAuth-Android](https://github.com/openid/AppAuth-Android) with [IdentityServer4](https://github.com/IdentityServer/IdentityServer4)
 
-I will add soon :
-* The registration part.
-* The logout from the android phone and from the server side.
 ## Identity Server on the backend 
 ```csharp
 new Client
 {
     ClientId = "myClientId",
     ClientName = "myClientName",
-    AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
     RequireConsent = false,
 
     ClientSecrets =
@@ -31,9 +27,20 @@ new Client
         IdentityServerConstants.StandardScopes.OfflineAccess //to get the refresh token
     },
 
-    AllowOfflineAccess = true
-}
-}
+    AllowOfflineAccess = true,
+    AllowedGrantTypes = GrantTypes.Code,
+    AllowAccessTokensViaBrowser = true,
+    RequireConsent = false,
+
+    AllowOfflineAccess = true,
+    RefreshTokenUsage = TokenUsage.ReUse,
+    RequirePkce = true,
+    
+    AllowedScopes = {
+                      IdentityServerConstants.StandardScopes.OpenId,
+                      IdentityServerConstants.StandardScopes.Profile,
+                    }
+  }
 ```	
 	
 	
@@ -47,3 +54,40 @@ new Client
     tokenEndpointUri= "myTokenEndPointUri"
     registrationEndpointUri= "myRegistrationEndPointUri"
     responseType= "code"
+
+
+
+
+## Add the redirect uri to gradle.app : 
+
+
+```
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+    defaultConfig {
+       ...
+        manifestPlaceholders = [
+                'appAuthRedirectScheme': 'myRedirectUri'
+        ]
+    }
+}
+```
+
+## Add the redirect uri to the RedirectUriReceiverActivity in manifest :
+
+
+```xml
+<activity
+	android:name="net.openid.appauth.RedirectUriReceiverActivity"
+	android:theme="@style/Theme.AppCompat.NoActionBar">
+		<intent-filter>
+			<action android:name="android.intent.action.VIEW"/>
+
+			<category android:name="android.intent.category.DEFAULT"/>
+			<category android:name="android.intent.category.BROWSABLE"/>
+
+			<data android:scheme="myRedirectUri"/>
+		</intent-filter>
+</activity>
+```
