@@ -66,7 +66,7 @@ android {
     defaultConfig {
        ...
         manifestPlaceholders = [
-                'appAuthRedirectScheme': 'myRedirectUri'
+                'appAuthRedirectScheme': 'myRedirectUri' //Without ://callback
         ]
     }
 }
