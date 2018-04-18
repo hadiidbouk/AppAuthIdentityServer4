@@ -7,37 +7,23 @@ Android sample using [AppAuth-Android](https://github.com/openid/AppAuth-Android
 ```csharp
 new Client
 {
-    ClientId = "myClientId",
-    ClientName = "myClientName",
-    RequireConsent = false,
+    	ClientId = _configuration["Clients:Mobile:Id"],
+ 	ClientName = "Mobile Application",
+        ClientSecrets = { new Secret(_configuration["Clients:Mobile:Secret"].Sha256())},
+        RedirectUris = {_configuration["Clients:Mobile:RedirectUrl"]},
+        PostLogoutRedirectUris = { _configuration["Clients:Mobile:PostLogoutRedirectUrl"] },
+	
+        AllowedGrantTypes = GrantTypes.Code,
+        AllowAccessTokensViaBrowser = true,
+        RequireConsent = false,
 
-    ClientSecrets =
-    {
-        new Secret("myClientSecret".Sha256())
-    },
+        AllowOfflineAccess = true,
+        RefreshTokenUsage = TokenUsage.ReUse,
 
-    RedirectUris = { "myRedirectUri://callback" },
-
-    AllowedScopes =
-    {
-        IdentityServerConstants.StandardScopes.OpenId,
-        IdentityServerConstants.StandardScopes.Profile,
-        IdentityServerConstants.StandardScopes.Email,
-        IdentityServerConstants.StandardScopes.Phone,
-        IdentityServerConstants.StandardScopes.OfflineAccess //to get the refresh token
-    },
-
-    AllowOfflineAccess = true,
-    AllowedGrantTypes = GrantTypes.Code,
-    AllowAccessTokensViaBrowser = true,
-    RequireConsent = false,
-    RefreshTokenUsage = TokenUsage.ReUse,
-    RequirePkce = true,
-    
-    AllowedScopes = {
-                      IdentityServerConstants.StandardScopes.OpenId,
-                      IdentityServerConstants.StandardScopes.Profile,
-                    }
+        AllowedScopes = {
+             IdentityServerConstants.StandardScopes.OpenId,
+             IdentityServerConstants.StandardScopes.Profile
+           }
   }
 ```	
 	
